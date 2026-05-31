@@ -1,4 +1,4 @@
-package handler
+package server
 
 import (
 	"net/http"
@@ -7,15 +7,15 @@ import (
 	"github.com/tomoEng11/go-backend-practice/gen/protected"
 )
 
-// ProtectedHandler implements protected.ServerInterface
-type ProtectedHandler struct{}
+// ProtectedServer implements protected.ServerInterface
+type ProtectedServer struct{}
 
-func NewProtectedHandler() *ProtectedHandler {
-	return &ProtectedHandler{}
+func NewProtectedServer() *ProtectedServer {
+	return &ProtectedServer{}
 }
 
 // GetChannels implements protected.ServerInterface
-func (h *ProtectedHandler) GetChannels(ctx echo.Context) error {
+func (s *ProtectedServer) GetChannels(ctx echo.Context) error {
 	channels := []protected.Channel{
 		{Id: 1, Name: "Go Backend Channel"},
 		{Id: 2, Name: "Echo Practice Channel"},
@@ -24,7 +24,7 @@ func (h *ProtectedHandler) GetChannels(ctx echo.Context) error {
 }
 
 // GetUsers implements protected.ServerInterface
-func (h *ProtectedHandler) GetUsers(ctx echo.Context) error {
+func (s *ProtectedServer) GetUsers(ctx echo.Context) error {
 	users := []protected.User{
 		{Id: 1, Name: "Alice"},
 		{Id: 2, Name: "Bob"},

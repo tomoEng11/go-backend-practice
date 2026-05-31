@@ -1,4 +1,4 @@
-package handler
+package server
 
 import (
 	"net/http"
@@ -7,15 +7,15 @@ import (
 	"github.com/tomoEng11/go-backend-practice/gen/public"
 )
 
-// PublicHandler implements public.ServerInterface
-type PublicHandler struct{}
+// PublicServer implements public.ServerInterface
+type PublicServer struct{}
 
-func NewPublicHandler() *PublicHandler {
-	return &PublicHandler{}
+func NewPublicServer() *PublicServer {
+	return &PublicServer{}
 }
 
 // GetHealth implements public.ServerInterface
-func (h *PublicHandler) GetHealth(ctx echo.Context) error {
+func (s *PublicServer) GetHealth(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, public.HealthResponse{
 		Status: "ok",
 	})
