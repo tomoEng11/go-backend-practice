@@ -1,0 +1,28 @@
+openapi: "3.0.3"
+info:
+  title: Public API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8080/public
+paths:
+  /health:
+    get:
+      summary: ヘルスチェック
+      operationId: getHealth
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          example: "ok"

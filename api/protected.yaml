@@ -1,24 +1,12 @@
 openapi: "3.0.3"
 info:
-  title: Go Backend API
+  title: Protected API
   version: "1.0.0"
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8080/api
 security:
   - BearerAuth: []
 paths:
-  /health:
-    get:
-      summary: ヘルスチェック
-      operationId: getHealth
-      security: []
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HealthResponse"
   /channels:
     get:
       summary: チャンネル一覧取得
@@ -32,21 +20,37 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Channel"
+  /users:
+    get:
+      summary: ユーザー一覧取得
+      operationId: getUsers
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
 components:
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
   schemas:
-    HealthResponse:
+    Channel:
       type: object
       required:
-        - status
+        - id
+        - name
       properties:
-        status:
+        id:
+          type: integer
+          format: int64
+        name:
           type: string
-          example: "ok"
-    Channel:
+    User:
       type: object
       required:
         - id
