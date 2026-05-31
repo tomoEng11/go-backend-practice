@@ -2,25 +2,27 @@
 
 Go + Echo を使ったバックエンドAPI練習用リポジトリ
 
+## ディレクトリ構成
+
+```
+.
+├── spec/                 # OpenAPI仕様
+│   ├── public.yaml       # 公開API (認証不要)
+│   └── protected.yaml    # 認証必須API
+├── gen/                  # 生成コード (編集しない)
+│   ├── public/
+│   └── protected/
+├── cmd/api/              # エントリーポイント
+├── internal/
+│   ├── server/           # ServerInterface 実装
+│   └── middleware/       # ミドルウェア
+└── Makefile
+```
+
 ## セットアップ
 
 ```bash
 go mod download
-```
-
-## サーバー起動
-
-```bash
-go run main.go
-```
-
-## OpenAPI コード生成
-
-### 必要なパッケージ
-
-```bash
-go get github.com/oapi-codegen/oapi-codegen/v2
-go get github.com/oapi-codegen/runtime
 ```
 
 ### oapi-codegen のインストール
@@ -29,24 +31,23 @@ go get github.com/oapi-codegen/runtime
 go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 ```
 
-### コード生成の実行
+## 使い方
 
 ```bash
-oapi-codegen --config api/cfg.yaml api/openapi.yaml
+# コード生成
+make generate
+
+# ビルド
+make build
+
+# 実行
+make run
 ```
 
-### go generate を使う場合
+## エンドポイント
 
-`api/generate.go` に以下を記述:
-
-```go
-package api
-
-//go:generate oapi-codegen --config cfg.yaml openapi.yaml
-```
-
-その後、以下のコマンドで生成:
-
-```bash
-go generate ./...
-```
+| パス | 認証 | 説明 |
+|-----|------|-----|
+| GET /public/health | 不要 | ヘルスチェック |
+| GET /api/channels | 必要 | チャンネル一覧 |
+| GET /api/users | 必要 | ユーザー一覧 |
