@@ -1,21 +1,21 @@
-package server
+package handler
 
 import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/tomoEng11/go-backend-practice/api/protected"
+	"github.com/tomoEng11/go-backend-practice/gen/protected"
 )
 
-// ProtectedServer implements protected.ServerInterface
-type ProtectedServer struct{}
+// ProtectedHandler implements protected.ServerInterface
+type ProtectedHandler struct{}
 
-func NewProtectedServer() *ProtectedServer {
-	return &ProtectedServer{}
+func NewProtectedHandler() *ProtectedHandler {
+	return &ProtectedHandler{}
 }
 
 // GetChannels implements protected.ServerInterface
-func (s *ProtectedServer) GetChannels(ctx echo.Context) error {
+func (h *ProtectedHandler) GetChannels(ctx echo.Context) error {
 	channels := []protected.Channel{
 		{Id: 1, Name: "Go Backend Channel"},
 		{Id: 2, Name: "Echo Practice Channel"},
@@ -24,7 +24,7 @@ func (s *ProtectedServer) GetChannels(ctx echo.Context) error {
 }
 
 // GetUsers implements protected.ServerInterface
-func (s *ProtectedServer) GetUsers(ctx echo.Context) error {
+func (h *ProtectedHandler) GetUsers(ctx echo.Context) error {
 	users := []protected.User{
 		{Id: 1, Name: "Alice"},
 		{Id: 2, Name: "Bob"},
